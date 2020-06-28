@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Playground</title>
+</head>
+
+<body>
+
+<input id='lat' type="text" name="">
+<input id='long' type="text" name="">
+<button onclick="sendMessage()">Submit</button>
+
+</body>
+<script>
+    var socket = new WebSocket('ws://localhost:9898');
+    socket.addEventListener('open', () => {socket.send('Hello World!');
+	});
+    socket.addEventListener('message', event => {console.log(`Message from server: ${event.data}`);
+    });
+
+    function sendMessage() {
+    var latitude = document.getElementById('lat').value;
+    var longitude = document.getElementById('long').value;
+	  socket.send(JSON.stringify({latitude,longitude}))
+	}
+</script>
+
+</html>
